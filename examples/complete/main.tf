@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 module "log_analytics" {
-  source = "github.com/equinor/terraform-azurerm-log-analytics?ref=v1.4.0"
+  source = "git::https://github.com/JatinRautela/azurerm-log-analytics.git"
 
   workspace_name      = "log-${random_id.example.hex}"
   resource_group_name = azurerm_resource_group.example.name
@@ -20,7 +20,7 @@ module "log_analytics" {
 }
 
 module "acr" {
-  source = "github.com/equinor/terraform-azurerm-acr?ref=v5.0.0"
+  source = "git::https://github.com/JatinRautela/azurerm-acr.git"
 
   registry_name              = "cr${random_id.example.hex}"
   resource_group_name        = azurerm_resource_group.example.name
@@ -37,7 +37,7 @@ module "storage" {
   location                     = azurerm_resource_group.example.location
   log_analytics_workspace_id   = module.log_analytics.workspace_id
   shared_access_key_enabled    = true
-  network_rules_default_action = "Allow"
+  #network_rules_default_action = "Allow"
 }
 
 resource "azurerm_storage_share" "example" {
