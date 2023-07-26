@@ -2,19 +2,21 @@ provider "azurerm" {
   features {}
 }
 
-resource "random_id" "example" {
-  byte_length = 8
+locals {
+  env         = "environment"
+  name        = "projectName"
+  name_prefix = "${local.env}-${local.name}"
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "rg-${random_id.example.hex}"
+  name     = "${local.name_prefix}-rg"
   location = var.location
 }
 
 module "log_analytics" {
   source = "git::https://github.com/JatinRautela/azurerm-log-analytics.git"
 
-  workspace_name      = "log-${random_id.example.hex}"
+  workspace_name      = "${local.name_prefix}-log"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
 }
@@ -23,7 +25,7 @@ module "aci" {
   # source = "git::https://github.com/JatinRautela/Azure_ACI.git"
   source = "../.."
 
-  container_group_name        = "ci-${random_id.example.hex}"
+  container_group_name        = "${local.name_prefix}-ci"
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
   log_analytics_workspace_id  = module.log_analytics.workspace_customer_id

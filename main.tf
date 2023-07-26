@@ -84,5 +84,7 @@ resource "azurerm_container_group" "this" {
     }
   }
 
-  tags = var.tags
+  tags = merge(local.common_tags, {
+    Name = "${local.name_prefix}-aci"
+  })
 }
