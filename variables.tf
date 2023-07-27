@@ -1,27 +1,32 @@
 variable "container_group_name" {
   description = "The name of this Container Group."
   type        = string
+  default     = "my-container-group"
 }
 
 variable "resource_group_name" {
   description = "The name of the resource group to create the resources in."
   type        = string
+  default     = "my-resource-group"
 }
 
 variable "location" {
   description = "The location to create the resources in."
   type        = string
+  default     = "northeurope"
 }
 
 variable "log_analytics_workspace_id" {
   description = "The workspace (customer) ID of the Log Analytics workspace to send diagnostics to."
   type        = string
+  default     = ""
 }
 
 variable "log_analytics_workspace_key" {
   description = "The shared key of the Log Analytics workspace to send diagnostics to."
   type        = string
   sensitive   = true
+  default     = ""
 }
 
 variable "containers" {
@@ -52,6 +57,8 @@ variable "containers" {
       share_name           = optional(string)
     })), [])
   }))
+
+  default = []
 }
 
 variable "os_type" {
