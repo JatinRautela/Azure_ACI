@@ -22,7 +22,7 @@ module "log_analytics" {
 }
 
 module "network" {
-  source = "github.com/equinor/terraform-azurerm-network?ref=v1.7.0"
+  source = "git::https://github.com/JatinRautela/Azure_ACI.git"
 
   vnet_name           = "${local.name_prefix}-vnet"
   resource_group_name = azurerm_resource_group.example.name
