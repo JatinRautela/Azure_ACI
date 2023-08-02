@@ -141,9 +141,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
-variable "create_vnet" {
-  description = "Create V-Net or not"
-  type        = bool
-  default = false
-}
