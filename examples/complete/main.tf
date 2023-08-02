@@ -3,9 +3,9 @@ provider "azurerm" {
 }
 
 locals {
-  env         = "environment"
-  name        = "projectName"
-  name_prefix = "${local.env}-${local.name}"
+  env         = "env"
+  name        = "pname"
+  name_prefix = "${local.env}${local.name}"
 }
 
 resource "azurerm_resource_group" "example" {
@@ -24,7 +24,7 @@ module "log_analytics" {
 module "acr" {
   source = "git::https://github.com/JatinRautela/azurerm-acr.git"
 
-  registry_name              = "${local.name_prefix}-cr"
+  registry_name              = "${local.name_prefix}cr"
   resource_group_name        = azurerm_resource_group.example.name
   location                   = azurerm_resource_group.example.location
   log_analytics_workspace_id = module.log_analytics.workspace_id
@@ -34,12 +34,12 @@ module "acr" {
 module "storage" {
   source = "git::https://github.com/JatinRautela/azurerm-storage.git"
 
-  account_name               = "${local.name_prefix}-st"
+  account_name               = "${local.name_prefix}st"
   resource_group_name        = azurerm_resource_group.example.name
   location                   = azurerm_resource_group.example.location
   log_analytics_workspace_id = module.log_analytics.workspace_id
   shared_access_key_enabled  = true
-  #network_rules_default_action = "Allow"
+  network_rules_default_action = "Allow"
 }
 
 resource "azurerm_storage_share" "example" {
@@ -49,7 +49,7 @@ resource "azurerm_storage_share" "example" {
 }
 
 module "aci" {
-  # source = "git::https://github.com/JatinRautela/Azure_ACI.git"
+  #source = "git::https://github.com/JatinRautela/Azure_ACI.git"
   source = "../.."
 
   container_group_name        = "${local.name_prefix}-ci"

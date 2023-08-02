@@ -9,7 +9,7 @@ resource "azurerm_container_group" "this" {
   dns_name_label              = var.dns_name_label
   dns_name_label_reuse_policy = var.dns_name_label_reuse_policy
   subnet_ids                  = var.subnet_ids
-  exposed_port                = null # Automatically set based on containers[*].ports
+  exposed_port                = var.exposed_port # Automatically set based on containers[*].ports
 
   dynamic "container" {
     for_each = var.containers

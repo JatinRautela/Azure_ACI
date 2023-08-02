@@ -16,6 +16,11 @@ variable "location" {
   default     = "northeurope"
 }
 
+variable "exposed_port" {
+  type = string
+  default = null
+}
+
 variable "log_analytics_workspace_id" {
   description = "The workspace (customer) ID of the Log Analytics workspace to send diagnostics to."
   type        = string

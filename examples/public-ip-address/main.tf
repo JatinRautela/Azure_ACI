@@ -3,9 +3,9 @@ provider "azurerm" {
 }
 
 locals {
-  env         = "environment"
-  name        = "projectName"
-  name_prefix = "${local.env}-${local.name}"
+  env         = "env"
+  name        = "pname"
+  name_prefix = "${local.env}${local.name}"
 }
 
 resource "azurerm_resource_group" "example" {
@@ -32,7 +32,7 @@ module "aci" {
   log_analytics_workspace_key = module.log_analytics.primary_shared_key
 
   ip_address_type             = "Public"
-  dns_name_label              = "aci-label-${random_id.example.hex}"
+  dns_name_label              = "${local.name_prefix}-aci-label"
   dns_name_label_reuse_policy = "TenantReuse"
 
   containers = [{
