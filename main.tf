@@ -1,4 +1,4 @@
-resource "azurerm_container_group" "this" {
+resource "azurerm_container_group" "container_group" {
   name                = var.container_group_name
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -84,7 +84,11 @@ resource "azurerm_container_group" "this" {
     }
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-ci"
-  })
+  # tags = merge(local.common_tags, {
+  #   Name = "${local.name_prefix}-ci"
+  # })
+
+  tags = merge(local.common_tags, tomap({
+    "Name" : local.project_name_prefix
+  }))
 }

@@ -145,3 +145,24 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "name" {
+  type        = string
+  description = "A string value to describe prefix of all the resources"
+  default     = ""
+}
+
+variable "default_tags" {
+  type        = map(string)
+  description = "A map to add common tags to all the resources"
+  default = {
+    "Scope" : "ACI"
+    "CreatedBy" : "Terraform"
+  }
+}
+
+variable "common_tags" {
+  type        = map(string)
+  description = "A map to add common tags to all the resources"
+  default     = {}
+}
