@@ -84,10 +84,6 @@ resource "azurerm_container_group" "container_group" {
     }
   }
 
-  # tags = merge(local.common_tags, {
-  #   Name = "${local.name_prefix}-ci"
-  # })
-
   tags = merge(local.common_tags, tomap({
     "Name" : local.project_name_prefix
   }))

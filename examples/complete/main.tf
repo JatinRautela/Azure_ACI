@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 locals {
-  env         = "env"
-  name        = "pname"
+  env         = var.env
+  name        = var.pname
   name_prefix = "${local.env}${local.name}"
 }
 

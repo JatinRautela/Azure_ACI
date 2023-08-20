@@ -23,20 +23,19 @@ Before using this Terraform module, ensure that you have the following prerequis
 - Option to mount volumes and secrets inside containers for persistent data storage.
 - Integrated diagnostics using Log Analytics to monitor container group performance.
 
-## Usage
-
-# Getting Started with Azure Container Group Terraform Module
+## Getting Started with Azure Container Group Terraform Module
 
 This repository contains a Terraform module to provision an Azure Container Group with one or more containers in an Azure Resource Group.
 
-## Prerequisites
+## Configure Azure Provider
 
-Before you begin, ensure you have the following installed on your system:
+To configure the Azure provider, you need to set up the necessary Azure credentials. If you already have the Azure CLI installed and authenticated with Azure, Terraform will use the same credentials.
 
-1. [Terraform](https://www.terraform.io/downloads.html) (version >= 1.3.0)
-2. [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (latest version)
+If you haven't authenticated with Azure, you can do so by running:
 
-You'll also need an Azure account and proper credentials set up to authenticate with Azure.
+```bash
+az login
+```
 
 ## Clone the Repository
 
@@ -57,16 +56,6 @@ terraform init
 ```
 
 This will download the necessary plugins required for Terraform to work with Azure.
-
-## Configure Azure Provider
-
-To configure the Azure provider, you need to set up the necessary Azure credentials. If you already have the Azure CLI installed and authenticated with Azure, Terraform will use the same credentials.
-
-If you haven't authenticated with Azure, you can do so by running:
-
-```bash
-az login
-```
 
 ## Apply the Terraform Configuration
 
