@@ -22,30 +22,28 @@ module "log_analytics" {
 }
 
 module "network" {
-  source = "github.com/equinor/terraform-azurerm-network?ref=v1.7.0"
+  source = "git::https://github.com/DeepakBoora/terraform-azure-vnet-setup.git"
 
   vnet_name           = "${local.name_prefix}-vnet"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  address_spaces      = ["10.0.0.0/16"]
-
+  address_space      = "10.0.0.0/16"
+  virtual_network_peering = false
+  
   subnets = {
-    "aci" = {
-      name             = "${local.name_prefix}-snet-aci"
-      address_prefixes = ["10.0.1.0/24"]
-
-      delegation = [{
-        name                       = "aci-delegation"
-        service_delegation_name    = "Microsoft.ContainerInstance/containerGroups"
-        service_delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-      }]
+     "aci" = {
+        address_prefixes = ["10.0.1.0/24"]
+        associate_with_route_table = false
+        service_delegation = true
+        delegation_name = "Microsoft.ContainerInstance/containerGroups"
+        delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
     }
   }
 }
 
 module "aci" {
-  # source = "git::https://github.com/JatinRautela/Azure_ACI.git"
-  source = "../.."
+  source = "git::https://github.com/JatinRautela/Azure_ACI.git"
+  #source = "../.."
 
   container_group_name        = "${local.name_prefix}-ci"
   resource_group_name         = azurerm_resource_group.rg.name
