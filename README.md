@@ -27,7 +27,7 @@ Before using this Terraform module, ensure that you have the following prerequis
 
 This repository contains a Terraform module to provision an Azure Container Group with one or more containers in an Azure Resource Group.
 
-## Configure Azure Provider
+### Configure Azure Provider
 
 To configure the Azure provider, you need to set up the necessary Azure credentials. If you already have the Azure CLI installed and authenticated with Azure, Terraform will use the same credentials.
 
@@ -37,7 +37,7 @@ If you haven't authenticated with Azure, you can do so by running:
 az login
 ```
 
-## Clone the Repository
+### Clone the Repository
 
 First, clone this repository to your local machine using the following command:
 
@@ -46,7 +46,7 @@ git clone <repository_url>
 cd <repository_name>
 ```
 
-## Initialize Terraform
+### Initialize Terraform
 
 Once you have cloned the repository, navigate to the module directory and initialize Terraform:
 
@@ -57,7 +57,7 @@ terraform init
 
 This will download the necessary plugins required for Terraform to work with Azure.
 
-## Apply the Terraform Configuration
+### Apply the Terraform Configuration
 
 After configuring the input variables, you can apply the Terraform configuration to create the Azure Container Group:
 
@@ -67,7 +67,7 @@ terraform apply
 
 Terraform will show you the changes that will be applied to the infrastructure. Type `yes` to confirm and apply the changes.
 
-## Clean Up
+### Clean Up
 
 To clean up the resources created by Terraform, you can use the `destroy` command:
 
@@ -77,6 +77,7 @@ terraform destroy
 
 Terraform will show you the resources that will be destroyed. Type `yes` to confirm and destroy the resources.
 
+## Usage
 
 ```hcl
 module "container_group" {
@@ -183,3 +184,35 @@ module "container_group" {
 - Refer to the official Terraform documentation for more details on using modules and configuring Azure resources with Terraform.
 
 - For more information on the Azure Container Group resource, refer to the Azure provider documentation.
+
+## List of variables
+
+| Variable Name                     | Description                                                    | Type       | Required | Default Value       |
+|-----------------------------------|----------------------------------------------------------------|------------|----------|---------------------|
+| `container_group_name`            | The name of this Container Group.                             | `string`   | Yes      | `"my-container-group"` |
+| `resource_group_name`             | The name of the resource group to create the resources in.   | `string`   | Yes      | `"my-resource-group"` |
+| `location`                        | The location to create the resources in.                     | `string`   | Yes      | `"northeurope"`       |
+| `containers`                      | A list of containers to create for this Container Group.     | `list`     | No       | `[]`                  |
+| `os_type`                         | The OS type of this Container Group.                         | `string`   | No       | `"Linux"`             |
+| `restart_policy`                  | The restart policy of this Container Group.                  | `string`   | No       | `"Always"`            |
+| `ip_address_type`                 | The IP address type of this Container Group.                 | `string`   | No       | `"None"`              |
+| `dns_name_label`                  | A DNS name label for this Container Group.                   | `string`   | No       | `null`                |
+| `dns_name_label_reuse_policy`     | The reuse policy to use for the DNS name label.              | `string`   | No       | `null`                |
+| `subnet_ids`                      | A list of subnet IDs to be assigned to this Container Group.| `list`     | No       | `null`                |
+| `dns_config`                      | The DNS configuration of this Container Group.               | `object`   | No       | `null`                |
+| `image_registry_credentials`      | A list of image registry credentials to configure.           | `list`     | No       | `[]`                  |
+| `identity`                        | The identity or identities to configure for this Container Group. | `object` | No       | `null`                |
+| `tags`                            | A map of tags to assign to the resources.                    | `map`      | No       | `{}`                  |
+| `name`                            | A string value to describe the prefix of all the resources.   | `string`   | No       | `""`                  |
+| `default_tags`                    | A map to add common tags to all the resources.               | `map`      | No       | See below             |
+| `common_tags`                     | A map to add common tags to all the resources.               | `map`      | No       | `{}`                  |
+
+Default value for `default_tags`:
+```hcl
+{
+  "Scope": "ACI",
+  "CreatedBy": "Terraform"
+}
+```
+
+Please note that the variables in the "Required" column that are marked "No" can be left empty if you don't want to provide a value for them.

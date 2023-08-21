@@ -18,11 +18,11 @@ variable "location" {
 
 variable "exposed_port" {
   description = "A set of objects representing the ports to be exposed for the containers."
-  type        = set(object({
+  type = set(object({
     port     = number
     protocol = string
   }))
-  default     = []
+  default = []
 }
 
 variable "log_analytics_workspace_id" {

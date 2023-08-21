@@ -34,11 +34,11 @@ module "acr" {
 module "storage" {
   source = "git::https://github.com/JatinRautela/azurerm-storage.git"
 
-  account_name               = "${local.name_prefix}st"
-  resource_group_name        = azurerm_resource_group.rg.name
-  location                   = azurerm_resource_group.rg.location
-  log_analytics_workspace_id = module.log_analytics.workspace_id
-  shared_access_key_enabled  = true
+  account_name                 = "${local.name_prefix}st"
+  resource_group_name          = azurerm_resource_group.rg.name
+  location                     = azurerm_resource_group.rg.location
+  log_analytics_workspace_id   = module.log_analytics.workspace_id
+  shared_access_key_enabled    = true
   network_rules_default_action = "Allow"
 }
 
