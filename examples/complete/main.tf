@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 module "log_analytics" {
-  source = "git::https://github.com/JatinRautela/azurerm-log-analytics.git"
+  source = "git::https://github.com/tothenew/terraform-azure-loganalytics.git"
 
   workspace_name      = "${local.name_prefix}-log"
   resource_group_name = azurerm_resource_group.rg.name
@@ -22,7 +22,7 @@ module "log_analytics" {
 }
 
 module "acr" {
-  source = "git::https://github.com/JatinRautela/azurerm-acr.git"
+  source = "git::https://github.com/tothenew/terraform-azure-acr.git"
 
   registry_name              = "${local.name_prefix}cr"
   resource_group_name        = azurerm_resource_group.rg.name
@@ -32,7 +32,7 @@ module "acr" {
 }
 
 module "storage" {
-  source = "git::https://github.com/JatinRautela/azurerm-storage.git"
+  source = "git::https://github.com/tothenew/terraform-azure-storageaccount.git"
 
   account_name                 = "${local.name_prefix}st"
   resource_group_name          = azurerm_resource_group.rg.name
@@ -49,7 +49,7 @@ resource "azurerm_storage_share" "storage_share" {
 }
 
 module "aci" {
-  #source = "git::https://github.com/JatinRautela/Azure_ACI.git"
+  #source = "git::https://github.com/tothenew/terraform-azure-container-instances.git"
   source = "../.."
 
   container_group_name        = "${local.name_prefix}-ci"

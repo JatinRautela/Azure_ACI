@@ -1,6 +1,31 @@
 # Terraform Module: azurerm_container_group
 
+[![Lint Status](https://github.com/tothenew/terraform-aws-template/workflows/Lint/badge.svg)](https://github.com/tothenew/terraform-aws-template/actions)
+[![LICENSE](https://img.shields.io/github/license/tothenew/terraform-aws-template)](https://github.com/tothenew/terraform-aws-template/blob/master/LICENSE)
+
 This Terraform module simplifies the creation of an Azure Container Group. An Azure Container Group is a group of one or more containers that share the same network and storage resources and are scheduled together on the same host.
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [azurerm](#requirement\_terraform) | >= 3.39.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_container_group](https://registry.terraform.io/modules/claranet/aci/azurerm/latest) | resource |
 
 ## Prerequisites
 
@@ -11,8 +36,7 @@ Before using this Terraform module, ensure that you have the following prerequis
 3. **Azure CLI**: Install the Azure CLI on your local machine. You can download it from the [Azure CLI website](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 - Terraform version >= 1.3.0 is required.
-- Azure provider version >= 3.16.0 is required.
-
+- Azure provider version >= 3.39.0 is required.
 
 ## Features
 
@@ -154,7 +178,7 @@ module "container_group" {
 | `location`                  | The location to create the resources in.        | string           | Required         |
 | `containers`                | A list of containers to create for this Container Group. | list(object)     | Required         |
 | `os_type`                   | The OS type of this Container Group.            | string           | "Linux"          |
-| `restart_policy`            | The restart policy of this Container Group.     | string           | "Always"         |
+| `restart_policy`            | The restart policy o16f this Container Group.     | string           | "Always"         |
 | `ip_address_type`           | The IP address type of this Container Group.    | string           | "None"           |
 | `dns_name_label`            | A DNS name label for this Container Group.      | string           | null             |
 | `dns_name_label_reuse_policy` | The reuse policy to use for the DNS name label. | string           | null             |
@@ -216,3 +240,11 @@ Default value for `default_tags`:
 ```
 
 Please note that the variables in the "Required" column that are marked "No" can be left empty if you don't want to provide a value for them.
+
+## Authors
+
+Module managed by [TO THE NEW Pvt. Ltd.](https://github.com/tothenew)
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/tothenew/terraform-aws-template/blob/main/LICENSE) for full details.
